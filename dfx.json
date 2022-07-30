@@ -12,7 +12,8 @@
         "entrypoint": "src/hackathon_coursework_frontend/src/index.html"
       },
       "source": [
-        "src/hackathon_coursework_frontend/assets",
+        "src/hackathon_coursework_frontend/src/assets",
+        "src/hackathon_coursework_frontend/src/components",
         "dist/hackathon_coursework_frontend/"
       ],
       "type": "assets"
