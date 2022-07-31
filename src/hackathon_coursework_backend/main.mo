@@ -39,5 +39,9 @@ actor {
     public query func removeCustomer(id: Nat) : async ?Types.Customer {
         customers.remove(Nat.toText(id))
     };
+
+    public func readAccount() : async [(Text, Types.Customer)] {
+      return Iter.toArray(customers.entries());
+    };
     
 };
