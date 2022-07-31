@@ -8,7 +8,7 @@ on:
   push:
     branches: [ "master" , "fe", "be" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "be" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -54,24 +54,9 @@ jobs:
       - name : run dfx
         run : |
           dfx start --background
-          dfx deploy --argument "(
-            principal\"$(dfx identity get-principal)\",
-            record {
-              logo = record {
-                logo_type = \"src/NFT_prepare_frontend/assets/favicon.ico\";
-                data = \"\";
-              };
-              name = \"My DIP721\";
-              symbol = \"DFXB\";
-              maxLimit = 10;
-            }
-          )"
+          dfx deploy 
       - name: mint NFT
-        run : dfx canister call NFT_prepare_backend mintDip721 \
-                "(
-                  principal\"$(dfx identity get-principal)\",
-                    record {id=\"De160000\"; cid=\"1234\"; center=\"FBT\"; name=\"HUSONE\"}
-                )"
+        run : dfx canister call hackathon_coursework_backend mintNFT \ "( principal\"$(dfx identity get-principal)\", opt record {desc=\"Test\"; name=\"test\"} )"
 
 
       - name : stop dfx

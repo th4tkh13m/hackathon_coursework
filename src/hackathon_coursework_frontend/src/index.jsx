@@ -25,6 +25,9 @@ const client = createClient({
 })
 
 const App = () => {
+  const [customerUpdate, setCustomerUpdate] = React.useState('')
+
+
   return (
     <div>
       <BrowserRouter>
