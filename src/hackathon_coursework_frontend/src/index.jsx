@@ -28,34 +28,19 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-<<<<<<< HEAD
-      <Container>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/customers" element={<Customers />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/customers/update" element={<CustomerUpdate />} />
-          </Routes>
-          {/* <ConnectDialog className="wallet_dialog"/> */}
-      </Container>
-    </BrowserRouter>
-=======
         <Container>
           <Connect2ICProvider client={client}> <NavBar />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/create" element={<Create />} />
               <Route path="/customers" element={<Customers />} />
+              <Route path="/customer-update" element={<CustomerUpdate />} />
               <Route path="/register" element={<Register />} />
             </Routes>
             <ConnectDialog className="wallet_dialog" />
           </Connect2ICProvider>
-
         </Container>
       </BrowserRouter>
->>>>>>> e44a5f1761012452a3ee7217603ba0f2e87b0f9a
     </div>
   )
 }
