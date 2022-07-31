@@ -52,6 +52,7 @@ export default function Create() {
       const cid = await client.put([file])
       console.log('stored files with cid:', cid)
       const imgURI = `${cid}.${DWEB_LINK}/${fileName}`
+      console.log(principal);
       const res = await hackathon_coursework_backend.mintNFT(Principal.fromText(principal), toOptional({
         cid, name: nftName, desc: nftDes
       }))
