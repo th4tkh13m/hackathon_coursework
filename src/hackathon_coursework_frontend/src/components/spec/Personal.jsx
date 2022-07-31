@@ -43,12 +43,12 @@ export default function Personal() {
         <div>
             <h1>My NFT</h1>
             <div>
-                {
+                {/* {
                     myNFT.map(async (nft) => {
                         const { id, metadata } = nft
 
                     })
-                }
+                } */}
                 <div className="wrap_imgs">
                     <img src="" alt="item" />
                 </div>
