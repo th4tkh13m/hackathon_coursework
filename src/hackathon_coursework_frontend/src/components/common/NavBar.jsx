@@ -4,35 +4,35 @@ import { Link } from 'react-router-dom'
 import Logo from '../../assets/images/logo_colored.png'
 
 import {
-  ConnectButton,
-  useConnect,
+    ConnectButton,
+    useConnect,
 } from '@connect2ic/react'
 export default function NavBar() {
-  const { principal } = useConnect()
-  return (
-    <Nav className="navbar navbar-expand-lg bg-light">
-      <div className="container-fluid">
-        <div>
-          <Link className="navbar-brand" to="/">
-            <img className="logo" src={Logo} alt="logo" />
-          </Link>
-          <Link className="navbar-brand" to="/">
-            Home
-          </Link>
-          <Link className="navbar-brand" to="/create">
-            Create Item
-          </Link>
-        </div>
-        <div className='d-flex align-items-center h100'>
-          {
-            principal &&
-            <div className='wallet_id'>{principal}</div>
-          }
-          <ConnectButton />
-        </div>
-      </div>
-    </Nav>
-  )
+    const { principal } = useConnect()
+    return (
+        <Nav className="navbar navbar-expand-lg bg-light">
+            <div className="container-fluid">
+                <div className="d-flex">
+                    <Link className="navbar-brand" to="/">
+                        <img className="logo" src={Logo} alt="logo" />
+                    </Link>
+                    <Link className="navbar-brand" to="/customers">
+                        <div>Customer lists</div>
+                    </Link>
+                    <Link  className="navbar-brand" to="/mint-and-transfer">
+                        <div>Mint & Transfer NFT</div>
+                    </Link>
+                </div>
+                <div className='d-flex align-items-center h100'>
+                    {
+                        principal &&
+                        <div className='wallet_id'>{principal}</div>
+                    }
+                    <ConnectButton />
+                </div>
+            </div>
+        </Nav>
+    )
 }
 
 
