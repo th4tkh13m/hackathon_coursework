@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import UploadGif from "../../assets/images/upload_gif.gif";
+import styled from "styled-components";
 
 export default function Create() {
   const [file, setFile] = useState(null)
@@ -54,26 +56,22 @@ export default function Create() {
   }
 
   return (
-    /*{ <div id="drop_zone" onDrop={(event) => dropHandler(event)} onDragOver={(event) => dragOverHandler(event)} style={{
-      border: "5px solid blue", width: "200px", height: "200px"
-    }}>
-      <p>Drag one or more files to this <i>drop zone</i>.</p>
-      <input
-        type="file"
-        className="form-control"
-        id="inputGroupFile02"
-        accept=".jpeg,.jpg,.png,.gif,image"
-        onChange={e => getFile(e)}
-      />
-    </div> }*/
+    
 
 
-
-    <div>
-      <div className="input-group mb-3">
-        {<img src={imgUri} alt="preview" />}
-        <label className="input-group-text" htmlFor="inputGroupFile02">
-          Choose File
+    <Container>
+      <h1 className="text-center">Create New Item</h1>
+      <div className="wrap-upload input-group mb-3 d-flex justify-content-center">
+        {
+          imgUri &&
+          <img className="previewImg" src={imgUri} alt="preview" />
+        }
+        <input type="file" name="file" id="fileUpload" onChange={(e) => getFile(e)}/>
+        <label htmlFor="fileUpload">
+          <div className="upload_label">
+            <img src={UploadGif} alt="upload gif" />
+            <h3>Click to upload Item</h3>
+          </div>
         </label>
       </div>
       <button className="btn btn-primary" onClick={() => generateNft()}>
@@ -92,6 +90,33 @@ export default function Create() {
         </div>
       </div>
       <button className="btn btn-primary">Mint</button>
-    </div >
+    </Container >
   )
 }
+
+const Container = styled.div`
+  .wrap-upload{
+    row-gap: 15px;
+    column-gap: 15px;
+  }
+  #fileUpload{
+    display: none;
+  }
+  .upload_label{
+      width: 250px;
+      height: 250px;
+      border: 3px dashed #ccc;
+      border-radius: 10px;
+      img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+  }
+  .previewImg{
+    width: 250px;
+    box-sizing: border-box;
+    border: 3px dashed #7df360;
+    border-radius: 10px;
+  }
+`;
