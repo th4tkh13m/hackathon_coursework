@@ -39,8 +39,16 @@ const Register = () => {
                     <input type="password" class="form-control" id="exampleInputPassword1" />
                 </div>
                 <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    <label class="form-check-label" for="exampleCheck3">Date of birth</label>
+                    <input type="date" class="form-check-input" id="exampleCheck3" />
+                </div>
+                <div class="mb-3 form-check">
+                    <label class="form-check-label" for="exampleCheck4">Phone</label>
+                    <input type="checkbox" class="form-check-input" id="exampleCheck4" />
+                </div>
+                <div class="mb-3 form-check">
+                    <label class="form-check-label" for="exampleCheck5">Address</label>
+                    <input type="checkbox" class="form-check-input" id="exampleCheck5" />
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
