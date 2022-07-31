@@ -26,7 +26,7 @@ actor {
     counter += 1;
   };
 
-public func updateCustomer(id : Nat, customer : Types.Customer) : async Text {
+  public func updateCustomer(id : Nat, customer : Types.Customer) : async Text {
         switch(findCustomer(id)){
             case(?c) {customers.put(Nat.toText(id), customer); "Update successfully"};
             case null {"Update failed"};
@@ -42,7 +42,7 @@ public func updateCustomer(id : Nat, customer : Types.Customer) : async Text {
         customers.remove(Nat.toText(id))
     };
     
-    public func readAccount() : async [(Text, Types.Customer)] {
+    public query func readAccount() : async [(Text, Types.Customer)] {
       return Iter.toArray(customers.entries());
     };
 
