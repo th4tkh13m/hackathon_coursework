@@ -8,7 +8,7 @@ on:
   push:
     branches: [ "master" , "fe", "be" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "be" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -59,7 +59,7 @@ jobs:
         run : dfx canister call hackathon_coursework_backend mintNFT \
                 "(
                   principal\"$(dfx identity get-principal)\",
-                    {desc="Test"; name="test"}
+                    record {desc="Test"; name="test"}
                 )"
 
 
