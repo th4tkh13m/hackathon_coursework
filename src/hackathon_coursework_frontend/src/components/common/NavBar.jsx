@@ -18,13 +18,13 @@ export default function NavBar() {
             Create Item
           </Link>
         </div>
-        <div className='d-flex align-items-center h100'>
+        {/* <div className='d-flex align-items-center h100'>
           {
             principal &&
-            <div className='wallet_id'>{principal}</div>
+            <div className='wallet_id'>{"principal"}</div>
           }
           <ConnectButton />
-        </div>
+        </div> */}
       </div>
     </Nav>
   )

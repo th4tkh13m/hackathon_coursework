@@ -1,9 +1,10 @@
-import { createRoot } from "react-dom/client";
-import React from "react";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-import Home from "./components/spec/Home.jsx";
-import Create from "./components/spec/Create.jsx";
-import Logo from "./assets/images/logo_colored.png";
+import * as React from 'react'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import NavBar from './components/common/NavBar'
+import Create from './components/spec/Create'
+import Home from './components/spec/Home';
+
 import styled from "styled-components";
 
 const App = () => {
@@ -16,7 +17,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/create" element={<Create />} />
           </Routes>
-          <ConnectDialog className="wallet_dialog"/>
+          {/* <ConnectDialog className="wallet_dialog"/> */}
       </Container>
     </BrowserRouter>
     </div>
