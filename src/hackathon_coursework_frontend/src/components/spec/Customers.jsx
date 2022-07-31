@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from "react-router-dom";
 
 export default function Customers() {
     return (
@@ -51,6 +52,9 @@ export default function Customers() {
                     </tr>
                 </tbody>
             </table>
+            <Link to="/register">
+                <button type="button" class="btn btn-primary">Register</button>
+            </Link>
         </div>
     )
 }
