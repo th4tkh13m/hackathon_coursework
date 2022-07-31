@@ -60,7 +60,7 @@ actor {
 
 
     //NFT Function
-    public shared({ caller }) func mintDip721(to: Principal, metadata: ?Types.Metadata) : async Types.MintResult {
+    public shared({ caller }) func mintNFT(to: Principal, metadata: ?Types.Metadata) : async Types.MintResult {
     
         switch(metadata) {
             case null {return #Err("The data invalid");};
@@ -79,5 +79,31 @@ actor {
         };
     };
 
+    private func findNFT(token_id : Nat64) : ?Types.Nft {
+        List.find(nfts, func(token: Types.Nft) : Bool { token.id == token_id })
+    };
 
-};
+    public shared({ caller }) func transfer(to: Principal, token_id : Nat64) : async Types.TxReceipt {
+        var thisNFT = findNFT(token_id);
+        switch(thisNFT) {
+            case null {return #Err("Token not found");};
+            case (?nft) {   
+                if (caller != nft.owner) {
+                    return #Err("Unauthorized");
+                } else {
+                    nfts := List.map(nfts, func (item : Types.Nft) : Types.Nft {
+                        if (item.id == nft.id) {let update : Types.Nft = {
+                            owner = to;
+                            id = item.id;
+                            metadata = nft.metadata;
+                        };
+                        return update;
+                    } else {return item;};
+                    });
+                };
+            };
+
+        };
+        #Ok("Transfer successfully");
+    };  
+}

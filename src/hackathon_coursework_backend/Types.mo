@@ -28,7 +28,7 @@ module {
     };
 
     public type MintResult = Result<Text, Text>;
-    
+    public type TxReceipt = Result<Text, Text>;
     //-------
 
       public type Dip721NonFungibleToken = {
@@ -46,7 +46,6 @@ module {
     };
 
     public type OwnerResult = Result<Principal, ApiError>;
-    public type TxReceipt = Result<Nat, ApiError>;
   
     public type TransactionId = Nat;
     public type TokenId = Nat64;
