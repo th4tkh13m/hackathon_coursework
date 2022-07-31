@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { hackathon_coursework_backend } from '../../../../declarations/hackathon_coursework_backend';
 
 export default function Customers() {
+    const [users, setUsers] = useState([])
+    useEffect(() => {
+        async function getNfts() {
+            const data = await hackathon_coursework_backend.readAccount()
+            console.log(data)
+            setUsers(data)
+        }
+        getNfts()
+    }, [])
+
     return (
         <div>
             <h1>Customer List</h1>
+
             <table className="table">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
+
                         <th scope="col">Name</th>
                         <th scope="col">Birthday</th>
                         <th scope="col">Phone</th>
@@ -17,41 +30,26 @@ export default function Customers() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Giacomo Guil</td>
-                        <td>20/07/2000</td>
-                        <td>0123456789</td>
-                        <td>Male</td>
-                        <td>
-                            <Link to="/customer/update">
-                                <button type="button" class="btn btn-warning">Update</button>
-                            </Link>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Giacomo Guil</td>
-                        <td>20/07/2000</td>
-                        <td>0123456789</td>
-                        <td>Male</td>
-                        <td>
-                            <button type="button" className="btn btn-warning">Update</button>
-                            <button type="button" className="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Giacomo Guil</td>
-                        <td>20/07/2000</td>
-                        <td>0123456789</td>
-                        <td>Male</td>
-                        <td>
-                            <button type="button" className="btn btn-warning">Update</button>
-                            <button type="button" className="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
+                    {
+                        users.map((user, index) => {
+                            console.log(user)
+                            const { firstName, lastName, dob, phone, address, sex } = user[1]
+                            return (<tr>
+                                <th scope="row">{index + 1}</th>
+                                <td>{lastName + " " + firstName}</td>
+                                <td>{sex}</td>
+                                <td>{phone}</td>
+                                <td>{address}</td>
+                                <td>{dob}</td>
+                                <td>
+                                    <Link to="/customer/update">
+                                        <button type="button" class="btn btn-warning">Update</button>
+                                    </Link>
+                                    <button type="button" class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>)
+                        })
+                    }
                 </tbody>
             </table>
             <Link to="/register">

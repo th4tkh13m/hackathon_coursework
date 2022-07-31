@@ -2,15 +2,9 @@ import React, { useState } from "react";
 import { hackathon_coursework_backend } from '../../../../declarations/hackathon_coursework_backend';
 
 const Register = () => {
-    const [users, setUsers] = useState([])
 
-    useEffect(() => {
-        async function getNfts() {
-            const data = await hackathon_coursework_backend.readAccount()
-            setUsers(data)
-        }
-        getNfts()
-    })
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const firstName = e.target.firstName.value
@@ -22,8 +16,6 @@ const Register = () => {
         const user = { dob, sex, address, phone, lastName, firstName }
 
         await hackathon_coursework_backend.createAccount(user)
-        const data = await hackathon_coursework_backend.readAccount()
-        setUsers(data)
     }
     return (
         <div className="
