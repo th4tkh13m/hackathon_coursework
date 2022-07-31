@@ -1,6 +1,7 @@
 import Time "mo:base/Time";
 module {
 
+    //--------
     public type Customer = {
         firstName: Text;
         lastName: Text;
@@ -9,6 +10,19 @@ module {
         phone: Text;
         address: Text;
     };
+
+    public type Nft = {
+        owner: Principal;
+        id: TokenId;
+        metadata: Metadata;
+    };
+    
+    public type Metadata = {
+        name : Text;
+        desc : Text;
+    };
+    
+    //-------
 
       public type Dip721NonFungibleToken = {
     logo: LogoResult;
@@ -48,25 +62,14 @@ module {
         data: Text;
     };
 
-    public type Nft = {
-        owner: Principal;
-        id: TokenId;
-        metadata: FullMetadata;
-    };
-
     public type ExtendedMetadataResult = Result<{
-        metadata_desc: FullMetadata;
+        metadata_desc: Metadata;
         token_id: TokenId;
     }, ApiError>;
 
-    public type MetadataResult = Result<FullMetadata, ApiError>;
+    public type MetadataResult = Result<Metadata, ApiError>;
 
-    public type FullMetadata = {
-        center : Text;
-        name : Text;
-        id : Text;
-        cid: Text;
-    };
+    
 
     public type MetadataPurpose = {
         #Preview;
