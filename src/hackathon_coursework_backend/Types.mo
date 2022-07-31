@@ -18,6 +18,7 @@ module {
     };
     
     public type Metadata = {
+        cid : Text;
         name : Text;
         desc : Text;
     };
