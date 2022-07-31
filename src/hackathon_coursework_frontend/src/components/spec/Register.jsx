@@ -1,18 +1,29 @@
 import React, { useState } from "react";
+import { hackathon_coursework_backend } from '../../../../declarations/hackathon_coursework_backend';
 
 const Register = () => {
-    const [user, setUser] = useState({})
     const [users, setUsers] = useState([])
 
-    const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        setUser(values => ({ ...values, [name]: value }))
-    }
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        async function getNfts() {
+            const data = await hackathon_coursework_backend.readAccount()
+            setUsers(data)
+        }
+        getNfts()
+    })
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setUsers([...users, user])
-        console.log(users);
+        const firstName = e.target.firstName.value
+        const lastName = e.target.lastName.value
+        let sex = e.target.sex.value
+        const dob = e.target.dob.value
+        const phone = e.target.phone.value
+        const address = e.target.address.value
+        const user = { dob, sex, address, phone, lastName, firstName }
+
+        await hackathon_coursework_backend.createAccount(user)
+        const data = await hackathon_coursework_backend.readAccount()
+        setUsers(data)
     }
     return (
         <div className="
@@ -20,42 +31,40 @@ const Register = () => {
             <h2>Register</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="exampleInputEmail1" className="form-label">First name</label>
-                    <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleChange} />
+                    <label htmlFor="exampleInputEmail1" className="form-label" >First name</label>
+                    <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="firstName" />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="exampleInputEmail2" className="form-label">Last name</label>
-                    <input type="text" className="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" onChange={handleChange} />
+                    <label htmlFor="exampleInputEmail2" className="form-label" >Last name</label>
+                    <input type="text" className="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" name="lastName" />
                 </div>
                 <div className="mb-3">
                     <div className="mb-3">
                         <div className="form-check">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={handleChange} />
+                            <input className="form-check-input" type="radio" name="sex" id="flexRadioDefault1" value="male" />
                             <label className="form-check-label" htmlFor="flexRadioDefault1">
                                 Male
                             </label>
                         </div>
                         <div className="form-check">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked onChange={handleChange} />
+                            <input className="form-check-input" type="radio" name="sex" id="flexRadioDefault2" value="fmale" />
                             <label className="form-check-label" htmlFor="flexRadioDefault2" >
                                 Female
                             </label>
                         </div>
                     </div>
-                    <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="exampleInputPassword1" onChange={handleChange} />
                 </div>
                 <div className="mb-3 form-check">
-                    <input type="date" className="form-check-input" id="exampleCheck3" onChange={handleChange} />
+                    <input type="date" className="form-check-input" id="exampleCheck3" name="dob" />
                     <label className="form-check-label" htmlFor="exampleCheck3">Date of birth</label>
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="exampleInputEmail1" className="form-label">Phone</label>
-                    <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleChange} />
+                    <label htmlFor="exampleInputEmail1" className="form-label" >Phone</label>
+                    <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="phone" />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="exampleInputEmail1" className="form-label">Address</label>
-                    <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleChange} />
+                    <label htmlFor="exampleInputEmail1" className="form-label" >Address</label>
+                    <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="address" />
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
