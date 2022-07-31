@@ -26,22 +26,24 @@ actor {
     counter += 1;
   };
 
-    public query func updateCustomer(id : Nat, customer : Types.Customer) : async Text {
-        customers.put(Nat.toText(id), customer);
-
-        "Update successfully"
-    };
+public func updateCustomer(id : Nat, customer : Types.Customer) : async Text {
+        switch(findCustomer(id)){
+            case(?c) {customers.put(Nat.toText(id), customer); "Update successfully"};
+            case null {"Update failed"};
+        };
+        
+    };    
 
     private func findCustomer(id : Nat) : ?Types.Customer {
         customers.get(Nat.toText(id))
     };
 
-    public query func removeCustomer(id: Nat) : async ?Types.Customer {
+    public func removeCustomer(id: Nat) : async ?Types.Customer {
         customers.remove(Nat.toText(id))
     };
-
+    
     public func readAccount() : async [(Text, Types.Customer)] {
       return Iter.toArray(customers.entries());
     };
-    
+
 };
