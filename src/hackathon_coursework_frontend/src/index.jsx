@@ -5,6 +5,7 @@ import NavBar from './components/common/NavBar'
 import Create from './components/spec/Create'
 import Home from './components/spec/Home';
 import Customers from './components/spec/Customers';
+import Register from './components/spec/Register';
 
 import styled from "styled-components";
 
@@ -32,6 +33,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/create" element={<Create />} />
               <Route path="/customers" element={<Customers />} />
+              <Route path="/register" element={<Register />} />
             </Routes>
             <ConnectDialog className="wallet_dialog" />
           </Connect2ICProvider>

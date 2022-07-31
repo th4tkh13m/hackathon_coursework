@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { Link } from "react-router-dom";
 
 export default function Customers() {
     return (
         <div>
             <h1>Customer List</h1>
-            <table class="table">
+            <table className="table">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -23,8 +24,8 @@ export default function Customers() {
                         <td>0123456789</td>
                         <td>Male</td>
                         <td>
-                            <button type="button" class="btn btn-warning">Update</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" className="btn btn-warning">Update</button>
+                            <button type="button" className="btn btn-danger">Delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -34,8 +35,8 @@ export default function Customers() {
                         <td>0123456789</td>
                         <td>Male</td>
                         <td>
-                            <button type="button" class="btn btn-warning">Update</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" className="btn btn-warning">Update</button>
+                            <button type="button" className="btn btn-danger">Delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -45,12 +46,15 @@ export default function Customers() {
                         <td>0123456789</td>
                         <td>Male</td>
                         <td>
-                            <button type="button" class="btn btn-warning">Update</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" className="btn btn-warning">Update</button>
+                            <button type="button" className="btn btn-danger">Delete</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <Link to="/register">
+                <button type="button" className="btn btn-primary">Register</button>
+            </Link>
         </div>
     )
 }
