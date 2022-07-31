@@ -16,6 +16,7 @@ const Register = () => {
         const user = { dob, sex, address, phone, lastName, firstName }
 
         await hackathon_coursework_backend.createAccount(user)
+        console.log("Registered!");
     }
     return (
         <div className="
