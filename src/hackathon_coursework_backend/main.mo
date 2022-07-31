@@ -28,15 +28,15 @@ actor {
     entries := Iter.toArray(customers.entries());
   };
 
-  system func postupgrade() {
-    entries := [];
-  };
+    system func postupgrade() {
+        entries := [];
+    };
 
 
-  public func createAccount(account: Types.Customer) {
-    customers.put(Nat.toText(counter), account);
-    counter += 1;
-  };
+    public func createAccount(account: Types.Customer) {
+        customers.put(Nat.toText(counter), account);
+        counter += 1;
+    };
 
     public func updateCustomer(id : Nat, customer : Types.Customer) : async Text {
         switch(findCustomer(id)){
@@ -107,26 +107,24 @@ actor {
         #Ok("Transfer successfully");
     };  
 
-    public query func getUserTokens(prin : Principal) : async [Types.Metadata] {
+    public query func getUserTokens(prin : Principal) : async [Types.Nft] {
         let iter : Iter.Iter<Types.Nft> = Iter.fromList(List.filter(nfts, func (item : Types.Nft) : Bool {
         return (item.owner == prin);
         }));
 
-        var array = Buffer.Buffer<Types.Metadata>(List.size(nfts));
+        var array = Buffer.Buffer<Types.Nft>(List.size(nfts));
         for(i in iter){
-            array.add(i.metadata);
+            array.add(i);
         };
         return array.toArray();
     };
 
-    public query func getAllTokens() : async [Types.Metadata] {
+    public query func getAllTokens() : async [Types.Nft] {
         let iter : Iter.Iter<Types.Nft> = List.toIter(nfts);
-
-        var array = Buffer.Buffer<Types.Metadata>(List.size(nfts));
-    // Debug.print(Nat.toText(List.size(nfts)));
-    for(i in iter){
-      array.add(i.metadata);
-    };
-    return array.toArray();
+        var array = Buffer.Buffer<Types.Nft>(List.size(nfts));
+        for(i in iter){
+            array.add(i);
+        };
+        return array.toArray();
     };
 }

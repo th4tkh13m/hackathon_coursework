@@ -5,8 +5,8 @@ module {
     public type Customer = {
         firstName: Text;
         lastName: Text;
-        sex: Bool;
-        dob: Time.Time;
+        sex: Text;
+        dob: Text;
         phone: Text;
         address: Text;
     };
