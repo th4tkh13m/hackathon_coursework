@@ -2,44 +2,34 @@ import React, { useState } from 'react';
 import UploadGif from "../../assets/images/upload_gif.gif";
 import styled from "styled-components";
 
+import { Web3Storage } from 'web3.storage'
+import { Principal } from '@dfinity/principal';
+import {
+  ConnectButton,
+  useConnect,
+} from '@connect2ic/react'
+
+import { hackathon_coursework_backend } from '../../../../declarations/hackathon_coursework_backend';
 export default function Create() {
-  const [file, setFile] = useState(null)
+  const { principal, connect } = useConnect()
+  const API_WEB3 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDAxMjlEZTAyQ0EzNTQzMzU2RkM0N0EzODQwMjRkQTA3NGJmQjUwNjIiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTkwNzI2MTkxNzEsIm5hbWUiOiJmaXJzdCJ9.c1rd8LfT2ea4vwWmSBoinvmSfwDJ3alXxAdFID0JE9k"
+  const DWEB_LINK = "ipfs.dweb.link"
   const [imgUri, setImgUri] = useState('')
+  const [file, setFile] = useState()
+  const [fileName, setFileName] = useState('')
+  const [name, setName] = useState('')
+  const [nfts, setNfts] = useState([])
+  const [nftName, setNftName] = useState('')
+  const [nftDes, setNftDes] = useState('')
 
-  // function dropHandler(ev) {
-  //   console.log('File(s) dropped');
-
-  //   // Prevent default behavior (Prevent file from being opened)
-  //   ev.preventDefault();
-
-  //   if (ev.dataTransfer.items) {
-  //     // Use DataTransferItemList interface to access the file(s)
-  //     for (let i = 0; i < ev.dataTransfer.items.length; i++) {
-  //       // If dropped items aren't files, reject them
-  //       if (ev.dataTransfer.items[i].kind === 'file') {
-  //         const file = ev.dataTransfer.items[i].getAsFile();
-  //         console.log(`… file[${i}].name = ${file.name}`);
-  //       }
-  //     }
-  //   } else {
-  //     // Use DataTransfer interface to access the file(s)
-  //     for (let i = 0; i < ev.dataTransfer.files.length; i++) {
-  //       let file = file[${i}]
-
-  //     }
-  //   }
-  // }
-
-  function dragOverHandler(ev) {
-    console.log('File(s) in drop zone');
-
-    // Prevent default behavior (Prevent file from being opened)
-    ev.preventDefault();
+  function toOptional(object) {
+    return object ? [object] : [];
   }
 
   const getFile = e => {
     let file = e.target.files[0]
-
+    setFile(file)
+    setFileName(file.name)
     if (file) {
       const reader = new FileReader()
       reader.onload = () => {
@@ -50,13 +40,34 @@ export default function Create() {
     }
   }
 
-  const generateNft = () => {
-    console.log("Generating NFT")
-    // console.log(process.env.REACT_APP_TOKEN_WEB3_STORAGE)
+  const generateNft = async () => {
+    if (!principal) {
+      alert("Please connect to PLug wallet first")
+    }
+    if (file && nftName && nftDes) {
+      console.log("Mining!")
+      console.log(file);
+      console.log(nftName, nftDes)
+      const client = new Web3Storage({ token: API_WEB3 })
+      const cid = await client.put([file])
+      console.log('stored files with cid:', cid)
+      const imgURI = `${cid}.${DWEB_LINK}/${fileName}`
+      const res = await hackathon_coursework_backend.mintNFT(Principal.fromText(principal), toOptional({
+        cid, name: nftName, desc: nftDes
+      }))
+      console.log(res);
+      setImgUri('')
+      setFile(null)
+      setFileName('')
+      setName('')
+      setNftName('')
+      setNftDes('')
+      console.log("Mined!");
+    }
   }
 
   return (
-    
+
 
 
     <Container>
@@ -66,7 +77,7 @@ export default function Create() {
           imgUri &&
           <img className="previewImg" src={imgUri} alt="preview" />
         }
-        <input type="file" name="file" id="fileUpload" onChange={(e) => getFile(e)}/>
+        <input type="file" name="file" id="fileUpload" onChange={(e) => getFile(e)} />
         <label htmlFor="fileUpload">
           <div className="upload_label">
             <img src={UploadGif} alt="upload gif" />
@@ -74,22 +85,22 @@ export default function Create() {
           </div>
         </label>
       </div>
-      <button className="btn btn-primary" onClick={() => generateNft()}>
+      {/* <button className="btn btn-primary" onClick={() => generateNft()}>
         Upload
-      </button>
+      </button> */}
       <div className="mb-3 row">
         <label htmlFor="inputName" className="col-sm-2 col-form-label">NFT Name</label>
         <div className="col-sm-10">
-          <input type="text" className="form-control" id="inputName" />
+          <input type="text" className="form-control" id="inputName" onChange={(e) => setNftName(e.target.value)} />
         </div>
       </div>
       <div className="mb-3 row">
         <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Description</label>
         <div className="col-sm-10">
-          <input type="text" className="form-control" id="inputPassword" />
+          <input type="text" className="form-control" id="inputPassword" onChange={(e) => setNftDes(e.target.value)} />
         </div>
       </div>
-      <button className="btn btn-primary">Mint</button>
+      <button className="btn btn-primary" onClick={() => generateNft()}>Mint</button>
     </Container >
   )
 }
