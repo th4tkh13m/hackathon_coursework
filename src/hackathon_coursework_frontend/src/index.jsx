@@ -7,6 +7,8 @@ import Home from './components/spec/Home';
 import Customers from './components/spec/Customers';
 import Register from './components/spec/Register';
 import CustomerUpdate from './components/spec/CustomerUpdate';
+import Personal from './components/spec/Personal';
+import Transfer from './components/spec/Transfer';
 
 import styled from "styled-components";
 
@@ -39,6 +41,8 @@ const App = () => {
               <Route path="/customers" element={<Customers />} />
               <Route path="/register" element={<Register />} />
               <Route path="/customer/update" element={<CustomerUpdate />} />
+              <Route path="/mint-and-transfer" element={<Personal />} />
+              <Route path="/mint-and-transfer/transfer" element={<Transfer />} />
             </Routes>
             <ConnectDialog className="wallet_dialog" />
           </Connect2ICProvider>
