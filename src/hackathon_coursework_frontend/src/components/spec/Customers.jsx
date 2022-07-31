@@ -24,29 +24,9 @@ export default function Customers() {
                         <td>0123456789</td>
                         <td>Male</td>
                         <td>
-                            <button type="button" class="btn btn-warning">Update</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Giacomo Guil</td>
-                        <td>20/07/2000</td>
-                        <td>0123456789</td>
-                        <td>Male</td>
-                        <td>
-                            <button type="button" class="btn btn-warning">Update</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Giacomo Guil</td>
-                        <td>20/07/2000</td>
-                        <td>0123456789</td>
-                        <td>Male</td>
-                        <td>
-                            <button type="button" class="btn btn-warning">Update</button>
+                            <Link to="/customers/update">
+                                <button type="button" class="btn btn-warning">Update</button>
+                            </Link>
                             <button type="button" class="btn btn-danger">Delete</button>
                         </td>
                     </tr>
