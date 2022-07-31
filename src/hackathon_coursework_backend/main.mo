@@ -61,7 +61,7 @@ actor {
 
     //NFT Function
     public shared({ caller }) func mintNFT(to: Principal, metadata: ?Types.Metadata) : async Types.MintResult {
-    
+        
         switch(metadata) {
             case null {return #Err("The data invalid");};
             case (?metadata) {
@@ -83,7 +83,7 @@ actor {
         List.find(nfts, func(token: Types.Nft) : Bool { token.id == token_id })
     };
 
-    public shared({ caller }) func transfer(to: Principal, token_id : Nat64) : async Types.TxReceipt {
+    public shared({ caller }) func Transfer(to: Principal, token_id : Nat64) : async Types.TxReceipt {
         var thisNFT = findNFT(token_id);
         switch(thisNFT) {
             case null {return #Err("Token not found");};
@@ -106,4 +106,27 @@ actor {
         };
         #Ok("Transfer successfully");
     };  
+
+    public query func getUserTokens(prin : Principal) : async [Types.Metadata] {
+        let iter : Iter.Iter<Types.Nft> = Iter.fromList(List.filter(nfts, func (item : Types.Nft) : Bool {
+        return (item.owner == prin);
+        }));
+
+        var array = Buffer.Buffer<Types.Metadata>(List.size(nfts));
+        for(i in iter){
+            array.add(i.metadata);
+        };
+        return array.toArray();
+    };
+
+    public query func getAllTokens() : async [Types.Metadata] {
+        let iter : Iter.Iter<Types.Nft> = List.toIter(nfts);
+
+        var array = Buffer.Buffer<Types.Metadata>(List.size(nfts));
+    // Debug.print(Nat.toText(List.size(nfts)));
+    for(i in iter){
+      array.add(i.metadata);
+    };
+    return array.toArray();
+    };
 }
