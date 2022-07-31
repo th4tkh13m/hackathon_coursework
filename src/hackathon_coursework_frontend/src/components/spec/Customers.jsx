@@ -24,6 +24,10 @@ export default function Customers() {
                         <td>0123456789</td>
                         <td>Male</td>
                         <td>
+                            <Link to="/customers/update">
+                                <button type="button" class="btn btn-warning">Update</button>
+                            </Link>
+                            <button type="button" class="btn btn-danger">Delete</button>
                             <button type="button" className="btn btn-warning">Update</button>
                             <button type="button" className="btn btn-danger">Delete</button>
                         </td>
