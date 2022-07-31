@@ -1,5 +1,3 @@
 actor {
-  public func greet(name : Text) : async Text {
-    return "Hello, " # name # "!";
-  };
+  stable cusomters = HashMap.HashMap<Text, Customer>(0, Text.equal, Text.hash);
 };
