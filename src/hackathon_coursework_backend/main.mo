@@ -1,5 +1,49 @@
+import HashMap "mo:base/HashMap";
+import Iter "mo:base/Iter";
+import Nat "mo:base/Nat";
+import Text "mo:base/Text";
+import Types "Types";
+
 actor {
-  public func greet(name : Text) : async Text {
-    return "Hello, " # name # "!";
+
+
+  stable var entries : [(Text, Types.Customer)] = [];
+  let customers = HashMap.fromIter<Text, Types.Customer>(entries.vals(), 0, Text.equal, Text.hash);
+
+  stable var counter : Nat = 1;
+
+  system func preupgrade() {
+    entries := Iter.toArray(customers.entries());
   };
+
+  system func postupgrade() {
+    entries := [];
+  };
+
+
+  public func createAccount(account: Types.Customer) {
+    customers.put(Nat.toText(counter), account);
+    counter += 1;
+  };
+
+  public func updateCustomer(id : Nat, customer : Types.Customer) : async Text {
+        switch(findCustomer(id)){
+            case(?c) {customers.put(Nat.toText(id), customer); "Update successfully"};
+            case null {"Update failed"};
+        };
+        
+    };    
+
+    private func findCustomer(id : Nat) : ?Types.Customer {
+        customers.get(Nat.toText(id))
+    };
+
+    public func removeCustomer(id: Nat) : async ?Types.Customer {
+        customers.remove(Nat.toText(id))
+    };
+    
+    public query func readAccount() : async [(Text, Types.Customer)] {
+      return Iter.toArray(customers.entries());
+    };
+
 };
