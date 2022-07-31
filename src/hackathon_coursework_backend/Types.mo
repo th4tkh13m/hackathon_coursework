@@ -21,6 +21,13 @@ module {
         name : Text;
         desc : Text;
     };
+
+    public type Result<S, E> = {
+        #Ok : S;
+        #Err : E;
+    };
+
+    public type MintResult = Result<Text, Text>;
     
     //-------
 
@@ -36,11 +43,6 @@ module {
         #InvalidTokenId;
         #ZeroAddress;
         #Other;
-    };
-
-    public type Result<S, E> = {
-        #Ok : S;
-        #Err : E;
     };
 
     public type OwnerResult = Result<Principal, ApiError>;
