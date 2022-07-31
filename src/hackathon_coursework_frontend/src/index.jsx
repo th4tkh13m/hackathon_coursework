@@ -7,19 +7,35 @@ import Home from './components/spec/Home';
 
 import styled from "styled-components";
 
+import { Connect2ICProvider, ConnectDialog } from '@connect2ic/react'
+import { createClient } from '@connect2ic/core'
+import { PlugWallet } from '@connect2ic/core/providers/plug-wallet'
+import { canisterId } from '../../declarations/hackathon_coursework_backend/index.js'
+import { idlFactory } from '../../declarations/hackathon_coursework_backend/hackathon_coursework_backend.did.js';
+
+const canisterDefinitions = {
+  superheroes: { idlFactory, canisterId },
+}
+const client = createClient({
+  canisters: canisterDefinitions,
+  providers: [new PlugWallet()],
+})
+
 const App = () => {
   return (
     <div>
       <BrowserRouter>
-      <Container>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/create" element={<Create />} />
-          </Routes>
-          {/* <ConnectDialog className="wallet_dialog"/> */}
-      </Container>
-    </BrowserRouter>
+        <Container>
+          <Connect2ICProvider client={client}> <NavBar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/create" element={<Create />} />
+            </Routes>
+            <ConnectDialog className="wallet_dialog" />
+          </Connect2ICProvider>
+
+        </Container>
+      </BrowserRouter>
     </div>
   )
 }

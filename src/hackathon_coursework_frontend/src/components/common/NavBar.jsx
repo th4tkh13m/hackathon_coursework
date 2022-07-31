@@ -3,7 +3,12 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/images/logo_colored.png'
 
+import {
+  ConnectButton,
+  useConnect,
+} from '@connect2ic/react'
 export default function NavBar() {
+  const { principal } = useConnect()
   return (
     <Nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
@@ -18,13 +23,13 @@ export default function NavBar() {
             Create Item
           </Link>
         </div>
-        {/* <div className='d-flex align-items-center h100'>
+        <div className='d-flex align-items-center h100'>
           {
             principal &&
-            <div className='wallet_id'>{"principal"}</div>
+            <div className='wallet_id'>{principal}</div>
           }
           <ConnectButton />
-        </div> */}
+        </div>
       </div>
     </Nav>
   )
