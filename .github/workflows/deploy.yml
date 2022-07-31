@@ -56,7 +56,7 @@ jobs:
           dfx start --background
           dfx deploy 
       - name: mint NFT
-        run : dfx canister call hackathon_coursework_backend mintNFT \ "( principal\"$(dfx identity get-principal)\", record {desc=\"Test\"; name=\"test\"} )"
+        run : dfx canister call hackathon_coursework_backend mintNFT \ "( principal\"$(dfx identity get-principal)\", opt record {desc=\"Test\"; name=\"test\"} )"
 
 
       - name : stop dfx
