@@ -24,16 +24,6 @@ export default function Customers() {
                         <td>0123456789</td>
                         <td>Male</td>
                         <td>
-<<<<<<< HEAD
-                            <Link to="/customer-update">
-                                <button type="button" className="btn btn-warning">
-                                    Update
-                                </button>
-                            </Link>
-                            <button type="button" className="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-=======
                             <Link to="/customers/update">
                                 <button type="button" class="btn btn-warning">Update</button>
                             </Link>
@@ -64,7 +54,6 @@ export default function Customers() {
                             <button type="button" className="btn btn-danger">Delete</button>
                         </td>
                     </tr>
->>>>>>> ca5533c2247fcf91642d5f7a300283ccaffa51b2
                 </tbody>
             </table>
             <Link to="/register">

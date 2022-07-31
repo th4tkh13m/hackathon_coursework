@@ -3,9 +3,9 @@ import React from 'react';
 const YourNFT = () => {
     const [nft, setNft] = React.useState([]);
 
-    const useEffect (() => {
+    // const useEffect (() => {
 
-    })
+    // })
 
     return (
         <>
