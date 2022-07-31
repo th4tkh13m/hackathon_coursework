@@ -34,6 +34,10 @@ actor {
 
     private func findCustomer(id : Nat) : ?Types.Customer {
         customers.get(Nat.toText(id))
-    }
+    };
 
+    public query func removeCustomer(id: Nat) : async ?Types.Customer {
+        customers.remove(Nat.toText(id))
+    };
+    
 };
