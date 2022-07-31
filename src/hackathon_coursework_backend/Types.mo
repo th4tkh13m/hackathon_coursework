@@ -1,12 +1,12 @@
 import Time "mo:base/Time";
 module {
 
-    public type Customer {
+    public type Customer = {
         id : Nat;
         firstName: Text;
         lastName: Text;
         sex: Bool;
-        dob: Time;
+        dob: Time.Time;
         phone: Text;
         address: Text;
     };

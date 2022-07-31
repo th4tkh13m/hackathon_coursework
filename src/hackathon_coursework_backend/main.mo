@@ -1,3 +1,7 @@
+import HashMap "mo:base/HashMap";
+import Types "Types";
+import Text "mo:base/Text";
+
 actor {
-  stable cusomters = HashMap.HashMap<Text, Customer>(0, Text.equal, Text.hash);
+  let customers = HashMap.HashMap<Text, Types.Customer>(0, Text.equal, Text.hash);
 };
