@@ -34,9 +34,8 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/create" element={<Create />} />
               <Route path="/customers" element={<Customers />} />
-              <Route path="/customer-update" element={<CustomerUpdate />} />
+              <Route path="/customer/update" element={<CustomerUpdate />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/customers/update" element={<CustomerUpdate />} />
             </Routes>
             <ConnectDialog className="wallet_dialog" />
           </Connect2ICProvider>
