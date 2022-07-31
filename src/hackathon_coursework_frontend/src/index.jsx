@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import NavBar from './components/common/NavBar'
 import Create from './components/spec/Create'
 import Home from './components/spec/Home';
+import Customers from './components/spec/Customers';
 
 import styled from "styled-components";
 
@@ -16,6 +17,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/create" element={<Create />} />
+            <Route path="/customers" element={<Customers />} />
           </Routes>
           {/* <ConnectDialog className="wallet_dialog"/> */}
       </Container>
